@@ -4,7 +4,9 @@
 """
 
 
-def power_numbers():
+def power_numbers(*numbers):
+    return list(num * num for num in numbers)
+
     """
     функция, которая принимает N целых чисел,
     и возвращает список квадратов этих чисел
@@ -12,6 +14,8 @@ def power_numbers():
     <<< [1, 4, 25, 49]
     """
 
+
+print(power_numbers(1, 2, 5, 7))
 
 # filter types
 ODD = "odd"
