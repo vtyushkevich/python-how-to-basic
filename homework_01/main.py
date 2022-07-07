@@ -5,7 +5,7 @@
 
 
 def power_numbers(*numbers):
-    return list(num * num for num in numbers)
+    return [num * num for num in numbers]
 
     """
     функция, которая принимает N целых чисел,
@@ -49,11 +49,11 @@ def filter_numbers(numbers, filter_type):
     <<< [2, 4]
     """
 
-    if filter_type == "even":
+    if filter_type == EVEN:
         return list(filter(lambda x: x % 2 == 0, numbers))
-    if filter_type == "odd":
+    if filter_type == ODD:
         return list(filter(lambda x: x % 2 != 0, numbers))
-    if filter_type == "prime":
+    if filter_type == PRIME:
         return is_prime(numbers)
 
 
