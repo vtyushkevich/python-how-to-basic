@@ -9,8 +9,8 @@ class Plane(Vehicle):
 
     cargo = 0
 
-    def __init__(self, weight, started, fuel, fuel_consumption, max_cargo=0):
-        super().__init__(weight, started, fuel, fuel_consumption)
+    def __init__(self, weight, fuel, fuel_consumption, max_cargo=0):
+        super().__init__(weight, fuel, fuel_consumption)
         self.max_cargo = max_cargo
 
     def load_cargo(self, addit_cargo):
@@ -21,7 +21,7 @@ class Plane(Vehicle):
             else:
                 raise CargoOverload
         except CargoOverload:
-            print("!!!___Cargo Overload___!!!")
+            raise CargoOverload
 
     def remove_all_cargo(self):
         try:
@@ -31,14 +31,14 @@ class Plane(Vehicle):
             self.cargo = 0
 
 
-if __name__ == "__main__":
-    my_plane = Plane(100000, False, 1000, 200, 400)
-    print("Max cargo is", my_plane.max_cargo, ", current cargo is", my_plane.cargo)
-    my_plane.load_cargo(20)
-    print("Max cargo is", my_plane.max_cargo, ", current cargo is", my_plane.cargo)
-    my_plane.load_cargo(20)
-    print("Max cargo is", my_plane.max_cargo, ", current cargo is", my_plane.cargo)
-    my_plane.load_cargo(1200)
-    print("Max cargo is", my_plane.max_cargo, ", current cargo is", my_plane.cargo)
-    print(my_plane.remove_all_cargo())
-    print("Max cargo is", my_plane.max_cargo, ", current cargo is", my_plane.cargo)
+# if __name__ == "__main__":
+#     my_plane = Plane(100000, False, 1000, 200, 400)
+#     print("Max cargo is", my_plane.max_cargo, ", current cargo is", my_plane.cargo)
+#     my_plane.load_cargo(20)
+#     print("Max cargo is", my_plane.max_cargo, ", current cargo is", my_plane.cargo)
+#     my_plane.load_cargo(20)
+#     print("Max cargo is", my_plane.max_cargo, ", current cargo is", my_plane.cargo)
+#     my_plane.load_cargo(1200)
+#     print("Max cargo is", my_plane.max_cargo, ", current cargo is", my_plane.cargo)
+#     print(my_plane.remove_all_cargo())
+#     print("Max cargo is", my_plane.max_cargo, ", current cargo is", my_plane.cargo)

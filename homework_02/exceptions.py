@@ -6,7 +6,7 @@
 """
 
 
-class Error(Exception):
+class Error(BaseException):
     pass
 
 
