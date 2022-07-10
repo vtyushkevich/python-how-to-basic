@@ -20,8 +20,10 @@ class Plane(Vehicle):
                 print("----> load", addit_cargo)
             else:
                 raise CargoOverload
-        except CargoOverload:
-            raise CargoOverload
+        finally:
+            print("!!!__CargoOverload__!!!")
+        # except CargoOverload:
+        #     raise CargoOverload
 
     def remove_all_cargo(self):
         try:
