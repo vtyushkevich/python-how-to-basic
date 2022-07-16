@@ -14,23 +14,29 @@ class Plane(Vehicle):
         self.max_cargo = max_cargo
 
     def load_cargo(self, addit_cargo):
-        try:
-            if self.cargo + addit_cargo <= self.max_cargo:
-                self.cargo += addit_cargo
-                print("----> load", addit_cargo)
-            else:
-                raise CargoOverload
-        finally:
+        # try:
+        if self.cargo + addit_cargo <= self.max_cargo:
+            self.cargo += addit_cargo
+            print("----> load", addit_cargo)
+        else:
             print("!!!__CargoOverload__!!!")
+            raise CargoOverload
+        # finally:
         # except CargoOverload:
         #     raise CargoOverload
 
     def remove_all_cargo(self):
-        try:
-            print("----> remove all cargo")
-            return self.cargo
-        finally:
-            self.cargo = 0
+        print("----> remove all cargo")
+        cargo_prev_value = self.cargo
+        self.cargo = 0
+        return cargo_prev_value
+
+    # def remove_all_cargo(self):
+    #     try:
+    #         print("----> remove all cargo")
+    #         return self.cargo
+    #     finally:
+    #         self.cargo = 0
 
 
 # if __name__ == "__main__":

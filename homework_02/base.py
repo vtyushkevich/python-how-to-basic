@@ -12,28 +12,28 @@ class Vehicle(ABC):
 
     def start(self):
         # print("----> start")
-        try:
-            if not self.started:
-                if self.fuel > 0:
-                    self.started = True
-                else:
-                    raise LowFuelError
+        # try:
+        if not self.started:
+            if self.fuel > 0:
+                self.started = True
             else:
-                print("____It's already started____")
-        finally:
-            print("!!!__LowFuelError__!!!")
+                print("!!!__LowFuelError__!!!")
+                raise LowFuelError
+        else:
+            print("____It's already started____")
+        # finally:
         # except LowFuelError:
         #     raise LowFuelError
 
     def move(self, distance=0):
         print("----> move to", distance, "km")
-        try:
-            if self.fuel_consumption * distance <= self.fuel:
-                self.fuel -= (self.fuel_consumption * distance)
-            else:
-                raise NotEnoughFuel
-        finally:
+        # try:
+        if self.fuel_consumption * distance <= self.fuel:
+            self.fuel -= (self.fuel_consumption * distance)
+        else:
             print("!!!__NotEnoughFuel__!!!")
+            raise NotEnoughFuel
+        # finally:
         # except NotEnoughFuel:
         #     raise NotEnoughFuel
 
