@@ -20,7 +20,7 @@ def hello(name: constr(min_length=3) = ""):
 
 @app.get("/ping")
 def ping_pong():
-    return {"message": "pong!"}
+    return {"message": "pong"}
 
 
 @app.get("/add")
