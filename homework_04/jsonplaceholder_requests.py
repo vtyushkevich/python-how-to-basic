@@ -15,7 +15,7 @@ async def fetch_json(session: aiohttp.ClientSession, url: str) -> dict:
         return data
 
 
-async def fetch_users_data() -> str | None:
+async def fetch_users_data() -> str:
     logger.info("fetch users")
 
     # # session = aiohttp.ClientSession()
@@ -27,7 +27,7 @@ async def fetch_users_data() -> str | None:
         return data
 
 
-async def fetch_posts_data() -> str | None:
+async def fetch_posts_data() -> str:
     logger.info("fetch user {}", POSTS_DATA_URL)
 
     # # session = aiohttp.ClientSession()
