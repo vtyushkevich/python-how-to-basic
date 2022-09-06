@@ -21,7 +21,7 @@ from sqlalchemy import Column, String, Boolean, Integer, ForeignKey
 class Base:
     @declared_attr
     def __tablename__(cls):
-        return f"{cls.__name__.lower()}s_info"
+        return f"{cls.__name__.lower()}s"
 
     id = Column(Integer, primary_key=True)
 
@@ -53,7 +53,7 @@ class User(Base):
 
 
 class Post(Base):
-    user_id = Column(Integer, ForeignKey("users_info.id"), unique=False)
+    user_id = Column(Integer, ForeignKey("users.id"), unique=False)
     title = Column(String(100), unique=False)
     body = Column(String(500), unique=False)
 
