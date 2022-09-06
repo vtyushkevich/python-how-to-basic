@@ -9,8 +9,60 @@
 """
 
 import os
+import asyncio
+
+from sqlalchemy import select
+from sqlalchemy.engine import Result
+from sqlalchemy.orm import sessionmaker, joinedload, selectinload, noload, declared_attr, declarative_base, relationship
+from sqlalchemy.ext.asyncio import create_async_engine, AsyncSession, AsyncEngine
+from sqlalchemy import Column, String, Boolean, Integer
+
+
+class Base:
+    @declared_attr
+    def __tablename__(cls):
+        return f"{cls.__name__.lower()}s"
+
+    id = Column(Integer, primary_key=True)
+
+    def __repr__(self):
+        return str(self)
+
+
+Base = declarative_base(cls=Base)
 
 PG_CONN_URI = os.environ.get("SQLALCHEMY_PG_CONN_URI") or "postgresql+asyncpg://postgres:password@localhost/postgres"
+async_engine: AsyncEngine = create_async_engine(PG_CONN_URI, echo=True,)
+Session = sessionmaker(async_engine, class_=AsyncSession, expire_on_commit=False,)
 
-Base = None
-Session = None
+
+class User(Base):
+    name = Column(String(20), unique=False)
+    username = Column(String(20), unique=True)
+    email = Column(String(20), unique=True)
+
+    posts = relationship("Post", back_populates="user", uselist=False)
+
+    def __str__(self):
+        return (
+            f"{self.__class__.__name__}("
+            f"name={self.name}, "
+            f"username={self.username}, "
+            f"email={self.email})"
+        )
+
+
+class Post(Base):
+    user_id = Column(Integer, unique=True)
+    title = Column(String(100), unique=False)
+    body = Column(String(500), unique=False)
+
+    posts = relationship("User", back_populates="posts", uselist=False)
+
+    def __str__(self):
+        return (
+            f"{self.__class__.__name__}("
+            f"user_id={self.user_id}, "
+            f"title={self.title}, "
+            f"body={self.body})"
+        )
