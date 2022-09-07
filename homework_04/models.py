@@ -53,11 +53,11 @@ class User(Base):
 
 
 class Post(Base):
-    user_id = Column(Integer, ForeignKey("users1.id"), unique=False)
+    user_id = Column(Integer, ForeignKey("users.id"), unique=False)
     title = Column(String(100), unique=False)
     body = Column(String(500), unique=False)
 
-    user = relationship("User", back_populates="posts", uselist=False)
+    user = relationship("User", back_populates="posts", uselist=True)
 
     def __str__(self):
         return (
