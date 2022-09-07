@@ -53,7 +53,7 @@ class User(Base):
 
 
 class Post(Base):
-    user_id = Column(Integer, ForeignKey("users.id"), unique=False)
+    user_id = Column(Integer, ForeignKey("users1.id"), unique=False)
     title = Column(String(100), unique=False)
     body = Column(String(500), unique=False)
 
