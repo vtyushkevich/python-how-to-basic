@@ -61,7 +61,7 @@ class Post(Base):
     title = Column(String(100), unique=False)
     body = Column(String(500), unique=False)
 
-    user = relationship("User", back_populates="posts", uselist=False)
+    user = relationship("User", back_populates="posts")
 
     def __str__(self):
         return (
