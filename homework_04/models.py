@@ -19,9 +19,9 @@ from sqlalchemy import Column, String, Boolean, Integer, ForeignKey
 
 
 class Base:
-    @declared_attr
-    def __tablename__(cls):
-        return f"{cls.__name__.lower()}s"
+    # @declared_attr
+    # def __tablename__(cls):
+    #     return f"{cls.__name__.lower()}s"
 
     id = Column(Integer, primary_key=True)
 
@@ -31,12 +31,14 @@ class Base:
 
 Base = declarative_base(cls=Base)
 
-PG_CONN_URI = os.environ.get("SQLALCHEMY_PG_CONN_URI") or "postgresql+asyncpg://postgres:password@localhost/postgres"
+PG_CONN_URI = os.environ.get("SQLALCHEMY_PG_CONN_URI") or "postgresql+asyncpg://username:passwd!@localhost/postgres"
 async_engine: AsyncEngine = create_async_engine(PG_CONN_URI, echo=True,)
 Session = sessionmaker(async_engine, class_=AsyncSession, expire_on_commit=False,)
 
 
 class User(Base):
+    __tablename__ = 'users_list'
+
     name = Column(String(50), unique=False)
     username = Column(String(50), unique=True)
     email = Column(String(50), unique=True)
@@ -53,11 +55,13 @@ class User(Base):
 
 
 class Post(Base):
-    user_id = Column(Integer, ForeignKey("users.id"), unique=False)
+    __tablename__ = 'posts_list'
+
+    user_id = Column(Integer, ForeignKey("users_list.id"), unique=False)
     title = Column(String(100), unique=False)
     body = Column(String(500), unique=False)
 
-    user = relationship("User", back_populates="posts", uselist=True)
+    user = relationship("User", back_populates="posts", uselist=False)
 
     def __str__(self):
         return (
