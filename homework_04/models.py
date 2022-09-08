@@ -19,9 +19,9 @@ from sqlalchemy import Column, String, Boolean, Integer, ForeignKey
 
 
 class Base:
-    # @declared_attr
-    # def __tablename__(cls):
-    #     return f"{cls.__name__.lower()}s"
+    @declared_attr
+    def __tablename__(cls):
+        return f"{cls.__name__.lower()}s"
 
     id = Column(Integer, primary_key=True)
 
@@ -37,7 +37,7 @@ Session = sessionmaker(async_engine, class_=AsyncSession, expire_on_commit=False
 
 
 class User(Base):
-    __tablename__ = 'users_list'
+    # __tablename__ = 'users_list'
 
     name = Column(String(50), unique=False)
     username = Column(String(50), unique=True)
@@ -55,9 +55,9 @@ class User(Base):
 
 
 class Post(Base):
-    __tablename__ = 'posts_list'
+    # __tablename__ = 'posts_list'
 
-    user_id = Column(Integer, ForeignKey("users_list.id"), unique=False)
+    user_id = Column(Integer, ForeignKey("users.id"), unique=False)
     title = Column(String(100), unique=False)
     body = Column(String(500), unique=False)
 
