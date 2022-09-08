@@ -92,7 +92,7 @@ async def main():
                 post_profile.get("body")
             )
         await session.commit()
-    Session().close
+    # Session().close
     await async_engine.dispose()
 
 
