@@ -17,6 +17,8 @@ from loguru import logger
 from models import async_engine, Base, Session, User, Post
 from jsonplaceholder_requests import fetch_posts_data, fetch_users_data
 
+import platform
+
 
 async def create_tables():
     async with async_engine.begin() as conn:
@@ -97,5 +99,6 @@ async def main():
 
 
 if __name__ == "__main__":
-    asyncio.set_event_loop_policy(asyncio.WindowsSelectorEventLoopPolicy())
+    if platform.system() == "Windows":
+        asyncio.set_event_loop_policy(asyncio.WindowsSelectorEventLoopPolicy())
     asyncio.run(main())
