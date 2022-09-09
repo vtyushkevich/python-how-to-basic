@@ -69,10 +69,6 @@ async def create_post(session, user_id: int, title: str, body: str) -> User:
 
 
 async def async_main():
-    pass
-
-
-async def main():
     await create_tables()
     users_data, posts_data = await fetch_users_posts_from_api()
     # logger.info(type(users_data))
@@ -98,7 +94,15 @@ async def main():
     await async_engine.dispose()
 
 
-if __name__ == "__main__":
+def main():
     if platform.system() == "Windows":
         asyncio.set_event_loop_policy(asyncio.WindowsSelectorEventLoopPolicy())
-    asyncio.run(main())
+    asyncio.run(async_main())
+
+
+if __name__ == "__main__":
+    main()
+
+    # if platform.system() == "Windows":
+    #     asyncio.set_event_loop_policy(asyncio.WindowsSelectorEventLoopPolicy())
+    # asyncio.run(main())
