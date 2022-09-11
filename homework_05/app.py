@@ -16,9 +16,20 @@ from flask import Flask, request, render_template
 app = Flask(__name__)
 
 
-@app.route("/")
-def hello_world():
+@app.route("/", endpoint="index_page")
+def index():
+    return render_template("index.html")
+
+
+@app.route("/about/", endpoint="about_page")
+def about():
+    return render_template("about.html")
     # print_request()
-    return "<h1>Hello, World!</h1>"
+    # return "<h1>about</h1>"
     # return render_template("index.html")
     # return render_template("base.html")
+
+
+if __name__ == "__main__":
+    app.run(debug=True)
+
